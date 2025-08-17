@@ -3,6 +3,7 @@
 // ENUMS
 export enum InputType {
   text = "text",
+  email = "email",
   password = "password",
-  email = "email"
+  passwordCheck = "passwordCheck"
 }
