@@ -1,3 +1,17 @@
+# Setup:
+## Docker and PostgreSQL:
+If you don't have it installed already, you'll need to [install Docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
+
+Be sure to follow the [post-installation](https://docs.docker.com/engine/install/linux-postinstall/) steps too.
+
+Copy the example.env, change the password to be a sensible password.
+
+Then we `docker compose up` in here, and the compose file does some magic.
+
+Then we create a database! YIPPEE :D
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
