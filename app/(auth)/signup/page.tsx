@@ -25,6 +25,31 @@ export default function SignUp() {
 
   const onSubmit = (values: signupSchema) => {
     console.log('values: ', values);
+
+    // TODO: call signUp(values) from auth.api.ts
+    // const response = await signUp(values);
+
+      // TODO: check for error mssgs and set errors
+      // if (response.statusCode === 409) {
+      //   if (response.message.includes("username")) {
+      //     setError("username", {
+      //       type: "manual",
+      //       message: response.message,
+      //     });
+      //   }
+
+      //   if (response.message.includes("email")) {
+      //     setError("email", {
+      //       type: "manual",
+      //       message: response.message,
+      //     });
+      //   }
+      // }
+
+      // TODO: call createSession from session.api.ts with the token
+      // if (response.token) {
+      //   await createSession(response.token);
+      // }
   };
 
   return (

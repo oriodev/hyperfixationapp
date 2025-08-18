@@ -23,8 +23,33 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (values: loginSchema) => {
+  const onSubmit = async (values: loginSchema) => {
     console.log('values: ', values);
+
+    // TODO: call login() in auth.api.ts eg. const response = await login(values);
+
+    // TODO: set errors based on response from login()
+    // if (response.statusCode === 401) {
+    //   if (response.message.includes("password")) {
+    //     setError("password", {
+    //       type: "manual",
+    //       message: response.message,
+    //     });
+    //   }
+
+    //   if (response.message.includes("email")) {
+    //     setError("email", {
+    //       type: "manual",
+    //       message: response.message,
+    //     });
+    //   }
+    // }
+
+    // TODO: create the session from the token
+    // if (response.token) {
+    //   await createSession(response.token);
+        // re-route to profile page with useRouter()
+    // }
   };
 
   return (
