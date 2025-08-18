@@ -2,12 +2,12 @@ import * as z from "zod";
 
 export const loginSchema = z.object({
   email: z
-    .email("That's not an email")
-    .nonempty("Email is required"),
+    .email("Please enter an email")
+    .nonempty("Please enter an required"),
 
   password: z
     .string()
-    .nonempty("That's not a password")
+    .nonempty("Please enter a password")
     .min(6, "Password must be at least 6 characters"),
 });
 
