@@ -1,3 +1,4 @@
+import { generateToken } from "@/utils/session.utils";
 import { deleteSession } from "./session.api";
 
 export const login = async () => {
@@ -12,7 +13,11 @@ export const login = async () => {
     // const match = await comparePasswords(password, hashedPassword);
 
     // 2d. throw exception if can't match
+    
     // 2e. generate a token based on the user id
+    const token = await generateToken('userId');
+    return token;
+
     // 2f. return the token
     
   } catch (error) {
