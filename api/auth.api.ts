@@ -7,7 +7,10 @@ export const login = async () => {
     // in login api route:
     // 2a. find the user from the email/username
     // 2b. throw exception if can't find
+
     // 2c. use bcrypt to check password match
+    // const match = await comparePasswords(password, hashedPassword);
+
     // 2d. throw exception if can't match
     // 2e. generate a token based on the user id
     // 2f. return the token
