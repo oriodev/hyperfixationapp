@@ -15,6 +15,7 @@ import { InputType } from "@/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { createSession } from "@/app/api/session.api";
 
 export default function Login() {
   const title = 'Login';
@@ -23,7 +24,9 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
+  // make login api call
   const onSubmit = async (values: loginSchema) => {
+    
     const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
@@ -32,7 +35,7 @@ export default function Login() {
       body: JSON.stringify(values),
     });
 
-    // set errors based on response from login()
+    // set errors based on response from login call
     if (!response.ok) {
       const errors = await response.json();
     
@@ -59,10 +62,10 @@ export default function Login() {
     }
 
     // TODO: create the session from the token
-    // if (response.token) {
-    //   await createSession(response.token);
-        // re-route to profile page with useRouter()
-    // }
+    const data = await response.json();
+    if (data.token) {
+      await createSession(data.token);
+    }
   };
 
   return (

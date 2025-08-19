@@ -15,41 +15,57 @@ import { InputType } from "@/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { createSession } from "@/app/api/session.api";
 
 export default function SignUp() {
   const title = "Sign up"
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, setError } = useForm({
     resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = (values: signupSchema) => {
-    console.log('values: ', values);
+  const onSubmit = async (values: signupSchema) => {
 
-    // TODO: call signUp(values) from auth.api.ts
-    // const response = await signUp(values);
+    // make signup api call
+    const response = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
 
-      // TODO: check for error mssgs and set errors
-      // if (response.statusCode === 409) {
-      //   if (response.message.includes("username")) {
-      //     setError("username", {
-      //       type: "manual",
-      //       message: response.message,
-      //     });
-      //   }
+    // set errors based on response from signup call
+    if (!response.ok) {
+      const errors = await response.json();
+    
+      if (errors.error) {
+        switch(true) {
+          case errors.error.includes("USERNAME ALREADY EXISTS"):
+            setError("username", {
+              type: "manual",
+              message: "Username already exists"
+            });
+            break;
 
-      //   if (response.message.includes("email")) {
-      //     setError("email", {
-      //       type: "manual",
-      //       message: response.message,
-      //     });
-      //   }
-      // }
+          case errors.error.includes("EMAIL ALREADY EXISTS"):
+            setError("email", {
+              type: "manual",
+              message: "Email already exists"
+            })
+            break;
+  
+          default:
+            break;
+        }
+      }
+    }
 
-      // TODO: call createSession from session.api.ts with the token
-      // if (response.token) {
-      //   await createSession(response.token);
-      // }
+    // set token
+    const data = await response.json();
+    if (data.token) {
+      await createSession(data.token);
+    }
   };
 
   return (

@@ -7,9 +7,6 @@ import { User, LoginData } from "@/types";
 
 export const POST = async (request: Request) => {
 
-  console.log('HELLO');
-  console.log('req: ', request)
-
   const user: LoginData = await request.json();
   const { email, password } = user;
 
@@ -18,7 +15,7 @@ export const POST = async (request: Request) => {
     const response: User = {
       id: '1',
       username: 'user',
-      email: 'email',
+      email: email,
       hashedPassword: '$2b$10$gBXNhS.S9te1g4kDHcFq0ecrm89Puu6j3tu8ItcMmiXWTJITzrNIe'
     };
 
