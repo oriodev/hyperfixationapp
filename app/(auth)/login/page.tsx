@@ -19,31 +19,44 @@ import Link from "next/link";
 export default function Login() {
   const title = 'Login';
 
- const { register, handleSubmit, formState: { errors } } = useForm({
+ const { register, handleSubmit, formState: { errors }, setError } = useForm({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (values: loginSchema) => {
-    console.log('values: ', values);
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
 
-    // TODO: call login() in auth.api.ts eg. const response = await login(values);
+    // set errors based on response from login()
+    if (!response.ok) {
+      const errors = await response.json();
+    
+      if (errors.error) {
+        switch(true) {
+          case errors.error.includes("PASSWORDS DO NOT MATCH"):
+            setError("password", {
+              type: "manual",
+              message: "Incorrect Password"
+            });
+            break;
 
-    // TODO: set errors based on response from login()
-    // if (response.statusCode === 401) {
-    //   if (response.message.includes("password")) {
-    //     setError("password", {
-    //       type: "manual",
-    //       message: response.message,
-    //     });
-    //   }
-
-    //   if (response.message.includes("email")) {
-    //     setError("email", {
-    //       type: "manual",
-    //       message: response.message,
-    //     });
-    //   }
-    // }
+          case errors.error.includes("COULD NOT FIND USER IN DB"):
+            setError("email", {
+              type: "manual",
+              message: "Email does not exist"
+            })
+            break;
+  
+          default:
+            break;
+        }
+      }
+    }
 
     // TODO: create the session from the token
     // if (response.token) {
