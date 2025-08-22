@@ -2,7 +2,7 @@
 
 // COMPONENTS
 import AuthContainer from "@/components/containers/auth-container";
-import Button from "@/components/form/button";
+import Button from "@/components/buttons/submit-button";
 import TextInput from "@/components/form/text-input";
 
 // SCHEMAS

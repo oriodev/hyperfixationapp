@@ -1,0 +1,32 @@
+import FixationDisplay from "@/components/containers/fixation-display";
+import Navbar from "@/components/containers/navbar";
+import ProfileHeader from "@/components/containers/profile-header";
+import ProfilePinnedBar from "@/components/containers/profile-pinned-bar";
+import { user } from "@/mock_data";
+
+export default function Home() {
+  // TODO: IMPORT ACTUAL USER DATA
+  const { username, bio, profile_tags, pinned_infodumps, fixations } = user;
+
+  return (
+    <div className="w-screen flex flex-col gap-8 blue-mesh-gradient p-0 md:p-10">
+      
+    {/* HEADER */}
+    <div>
+      <Navbar />
+      <ProfileHeader
+        username={username}
+        bio={bio}
+        tags={profile_tags}
+      />
+    </ div>
+      
+    {/* PINNED POSTS AND CHECK IN */}
+    <ProfilePinnedBar pinnedInfodumps={pinned_infodumps} />
+    
+    {/* FIXATIONS */}
+    <FixationDisplay fixations={fixations} />
+
+    </div>
+  )
+}
