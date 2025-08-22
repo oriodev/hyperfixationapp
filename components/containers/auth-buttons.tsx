@@ -1,6 +1,6 @@
 'use client'
 
-import Button from "@/components/form/button";
+import Button from "@/components/buttons/submit-button";
 import { useRouter } from "next/navigation";
 
 const AuthButtons = () => {
