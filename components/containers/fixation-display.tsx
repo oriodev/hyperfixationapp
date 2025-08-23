@@ -1,4 +1,7 @@
+// TYPES
 import { Fixation } from "@/types";
+
+// COMPONENTS
 import FixationTopBar from "./fixation-top-bar";
 
 interface FixationDisplayProps {

@@ -1,6 +1,9 @@
 'use client'
 
+// COMPONENTS
 import Button from "@/components/buttons/submit-button";
+
+// HOOKS
 import { useRouter } from "next/navigation";
 
 const AuthButtons = () => {

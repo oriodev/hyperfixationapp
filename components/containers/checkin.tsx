@@ -1,4 +1,7 @@
+// TYPES
 import { Checkin, CheckinType } from "@/types";
+
+// PACKAGES
 import { BiBook, BiGame, BiMovie, BiMusic, BiTv } from "react-icons/bi";
 
 interface CheckinProps {
@@ -30,7 +33,7 @@ const CheckIn = ({ checkins }: CheckinProps) => {
               const Icon = iconmap[checkin.type];
 
               return (
-                <div className="flex gap-2 items-center bg-white rounded-2xl p-2 pl-5">
+                <div key={checkin.text} className="flex gap-2 items-center bg-white rounded-2xl p-2 pl-5">
                   <Icon size={20} className="font-black" />
                   <p className="text-lg">{ checkin.text }</p>
                 </div>

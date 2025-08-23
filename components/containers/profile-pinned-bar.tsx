@@ -1,6 +1,8 @@
+// COMPONENTS
 import CheckIn from "@/components/containers/checkin";
 import PinnedInfodump from "@/components/containers/pinned-infodump";
 
+// TYPES
 import { Checkin, Infodump } from "@/types";
 
 interface ProfilePinnedBar {

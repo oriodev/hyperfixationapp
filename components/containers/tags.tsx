@@ -1,3 +1,4 @@
+// COMPONENTS
 import Tag from "@/components/labels/tag";
 
 interface TagsProps {

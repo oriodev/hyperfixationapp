@@ -1,4 +1,7 @@
+// PACKAGES
 import { BiCog, BiHome, BiLogOut, BiSearch } from "react-icons/bi";
+
+// COMPONENTS
 import MenuButton from "@/components/buttons/menu-button";
 
 const Navbar = () => {

@@ -1,3 +1,4 @@
+// COMPONENTS
 import AuthButtons from "@/components/containers/auth-buttons";
 
 export default function Home() {

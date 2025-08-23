@@ -1,4 +1,7 @@
+// TYPES
 import type { Metadata } from "next";
+
+// STYLES
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 

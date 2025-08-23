@@ -1,7 +1,10 @@
+// COMPONENTS
 import FixationDisplay from "@/components/containers/fixation-display";
 import Navbar from "@/components/containers/navbar";
 import ProfileHeader from "@/components/containers/profile-header";
 import ProfilePinnedBar from "@/components/containers/profile-pinned-bar";
+
+// UTILS
 import { user } from "@/mock_data";
 
 export default function Home() {

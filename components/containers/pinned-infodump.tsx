@@ -1,4 +1,7 @@
+// TYPES
 import { Infodump } from "@/types";
+
+// PACKAGES
 import { BiPin } from "react-icons/bi";
 
 interface PinnedInfodumpProps {

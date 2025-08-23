@@ -1,9 +1,14 @@
 'use client'
 
+// TYPES
 import { InputType } from "@/types";
+
+// HOOKS
 import { useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importing React Icons
+
+// PACKAGES
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 interface TextInput {
   title: string;

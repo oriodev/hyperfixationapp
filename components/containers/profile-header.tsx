@@ -1,3 +1,4 @@
+// COMPONENTS
 import Tags from "@/components/containers/tags";
 
 interface ProfileHeaderProps {
