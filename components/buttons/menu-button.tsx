@@ -1,13 +1,13 @@
 // TYPES
 import { NavLink } from "@/types";
+
+// COMPONENT
 import Link from "next/link";
 
 interface MenuButtonProps {
   link: NavLink;
   active: boolean;
 }
-
-// TODO: ONLY APPLY BG-WHITE WHEN ON THIS PAGE
 
 const MenuButton = ({ link, active }: MenuButtonProps) => {
   const { text, icon: Icon, href } = link;

@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const links: NavLink[] = [
     { text: 'Home', href: '/home', icon: BiHome },
-    { text: 'Search', href: '/', icon: BiSearch },
+    { text: 'Search', href: '/search', icon: BiSearch },
     { text: 'Settings', href: '/', icon: BiCog },
   ]
 
