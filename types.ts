@@ -1,3 +1,5 @@
+import { IconType } from "react-icons"
+
 // TYPES
 export type Checkin = {
   text: string,
@@ -12,6 +14,12 @@ export type Infodump = {
 export type Fixation = {
   title: string,
   image: string
+}
+
+export type NavLink = {
+  text: string,
+  href: string,
+  icon: IconType
 }
 
 // ENUMS
