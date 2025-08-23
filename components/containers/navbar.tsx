@@ -9,8 +9,11 @@ import { NavLink } from "@/types";
 
 // HOOKS
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const currentPath = usePathname();
+
   const [open, setOpen] = useState<boolean>(false)
 
   const links: NavLink[] = [
@@ -34,7 +37,7 @@ const Navbar = () => {
       >
         {
           links.map(link => (
-            <MenuButton key={link.text} title={link.text} Icon={link.icon} />          
+            <MenuButton key={link.text} link={link} active={currentPath === link.href} />          
           ))
         }
       </div>
@@ -52,7 +55,7 @@ const Navbar = () => {
         <div className="md:hidden bg-white p-3 pt-5 pb-5 rounded-2xl absolute top-12 left-2 flex flex-col gap-3">
           {
             links.map(link => (
-              <MenuButton key={link.text} title={link.text} Icon={link.icon} />
+              <MenuButton key={link.text} link={link} active={currentPath === link.href} />
             ))
           }
         </div>
