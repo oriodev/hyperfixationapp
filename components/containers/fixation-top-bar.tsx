@@ -3,9 +3,11 @@ import { MdArrowDropDown } from "react-icons/md";
 
 const FixationTopBar = () => {
   return (
-    <div className="bg-white text-black w-full rounded-2xl flex justify-between p-5 pl-10 pr-10">
-      <div className="flex gap-8 items-center">
-        <p className="text-3xl font-black">FIXATIONS</p>
+    <>
+      {/* DESKTOP VERSION */}
+      <div className="hidden bg-white text-black w-full rounded-2xl lg:flex justify-between p-5 pl-10 pr-10">
+        <div className="flex gap-8 items-center">
+          <p className="text-3xl font-black">FIXATIONS</p>
 
           {/* FILTERS */}
 
@@ -39,6 +41,18 @@ const FixationTopBar = () => {
           <p>search...</p>
         </div>
       </div>
+
+
+      {/* MOBILE AND TABLET VERSION */}
+      <div className="flex lg:hidden flex-col gap-2 bg-white text-black w-full items-center justify-center p-5">
+          <p className="text-3xl font-black">FIXATIONS</p>
+          <div className="flex gap-2">
+            <p className="underline hover:cursor">Recent</p>
+            <p className="hover:cursor">Favourites</p>
+            <p className="hover:cursor">Alphabetical</p>
+          </div>
+      </div>
+    </>
   )
 }
 

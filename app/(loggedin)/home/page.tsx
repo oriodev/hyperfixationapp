@@ -9,7 +9,7 @@ import { user } from "@/mock_data";
 
 export default function Home() {
   // TODO: IMPORT ACTUAL USER DATA
-  const { username, bio, profile_tags, pinned_infodumps, fixations, checkin } = user;
+  const { username, bio, profile_picture, profile_tags, pinned_infodumps, fixations, checkin } = user;
 
   return (
     <div className="w-screen flex flex-col gap-8 blue-mesh-gradient p-0 md:p-10">
@@ -21,6 +21,7 @@ export default function Home() {
           username={username}
           bio={bio}
           tags={profile_tags}
+          profilePicture={profile_picture}
         />
       </ div>
         

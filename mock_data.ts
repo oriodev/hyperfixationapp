@@ -3,6 +3,7 @@ import { CheckinType } from "./types";
 export const user = {
   username: 'lucabear',
   bio: 'i like the ocean and pokemon and cavetown',
+  profile_picture: 'lucabear.jpg',
   profile_tags: ['pokemon', 'cavetown', 'science', 'minecraft'],
   pinned_infodumps: [
     {

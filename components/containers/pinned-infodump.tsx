@@ -23,7 +23,7 @@ const PinnedInfodump = ({ infodump }: PinnedInfodumpProps) => {
       style={{backgroundImage: `url(${imagePath})`}}
     >
         <BiPin size={50} className="text-white" />
-        <p className="w-full h-full flex items-end justify-end font-bold text-xl text-white">{ title }</p> 
+        <p className="w-full h-full flex items-end justify-end font-bold text-xl text-white text-shadow-lg">{ title }</p> 
     </div>
   )
 }
