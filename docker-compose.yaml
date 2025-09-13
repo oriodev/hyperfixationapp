@@ -1,0 +1,43 @@
+# Each service is a different container
+services:
+  # 'database' is the name of the service we are running it in
+  # Note: if you change this, it will change how you connect to the container
+  # i.e. docker compose exec database bash will become
+  # docker compose exec <your new name> bash
+  # to attach the container to your terminal :)
+  database:
+    # Official Postgres image from DockerHub (we use the last version)
+    image: "postgres:latest"
+
+    # [port on host machine]:[port in container]
+    # Postgres db runs on 5432 by default.
+    ports:
+      - 5432:5432
+
+    env_file:
+      - .env
+
+    restart: unless-stopped
+    volumes:
+      # Giving it an initialisation script to run on startup
+      # Should create tables if they don't exist
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # Sharing the folder `db-data` in our root repository, with the default PostgreSQL data path
+      # It means that every time the repository is modifying the data inside
+      # of `/var/lib/postgresql/data/`, automatically the change will appear in `db-data`
+      # You don't need to create the `db-data` folder. Docker Compose will do it for you
+      - ./db-data/:/var/lib/postgresql/data/
+
+  # Adds pgadmin to localhost. Can be accessed at localhost:5050 (or whichever port specified below)
+  # and logged in with credentials defined in .env file
+  pgadmin:
+    image: dpage/pgadmin4
+    # [port on host machine]:[port in container]
+    ports:
+      - "5050:80"
+    env_file:
+      - .env
+    depends_on:
+      - database
+    volumes:
+      - "./pgadmin-data/:/var/lib/pgadmin/"

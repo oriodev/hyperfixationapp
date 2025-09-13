@@ -1,3 +1,42 @@
+# Setup:
+## Docker and PostgreSQL:
+If you don't have it installed already, you'll need to [install Docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
+
+Be sure to follow the [post-installation](https://docs.docker.com/engine/install/linux-postinstall/) steps too.
+
+Copy the example.env, and fill in the variables to have sensible values. You can set your pgadmin credentials to whatever you like.
+Default database user is `admin`, and the name of the db should be `hyperfixation`. Idk why you'd change it but I guess it's good to have configurability for future proofing.
+
+Then, open a terminal in the repo, and `docker compose up`, and the compose file does some magic. It should run the `init.sql` script and create the database tables if they don't already exist (leaving them alone if they do!)
+
+If you need to attach a terminal to the docker container directly (e.g. to run `pgsql` commands directly), then `docker compose exec database bash` for database container, or `docker compose exec pgadmin bash` for the pgadmin container. When you're inside the database container, you can run pgsql commands by firstly attaching to the database with `psql -U admin -d hyperfixation`. If you changed dthe default user from "admin" in the .env, change it to match that in the command. Same for the database name. You should be able to use pgsql commands now, like `\l` to list all DBs, `\c` to change DB (if for some reason you want to do that, but you shouldn't need to), and running regular ol' SQL statements. Note: you MUST have a semi-colon at the end of your SQL statements or they will NOT run!
+
+To access pgadmin, to do database things within the web client, you can visit `localhost:5050` and log in with the credentials you specified in the .env file. In the left-hand sidebar, click Servers, then click on the hyperfixation db. Then you'll be prompted for a password for the admin user. It's the one you set in the .env file. Under Schemas > public > Tables, choose a table, then right click on it and click view/edit data, allowing you to (you guessed it) view and edit data.
+
+### Troubleshooting
+
+#### "Port already in use" error when running `docker compose up`?
+It probably didn't shut down properly last time.
+`netstat -tnlp | grep 5432` to get the pid of the postgres process.
+Then kill it with `sudo kill -9 <pid>` (without the angle brackets of course).
+Then `docker compose up` again.
+
+#### The database didn't initialise when I first ran `docker compose up`?
+Most likely a permissions issue (it should be globally executable).
+`chmod 755 ./init.sql`
+`rm -rf ./db-data/`
+`docker compose up`
+Hopefully should initialise now.
+
+#### pgadmin isn't working :(
+Most likely a perms/ownership issue.
+From the root of the repo, outside the container, `chown -R 5050 ./pgadmin-data`.
+OR
+From within the pgadmin container, `chown -R pgadmin /pgadmin`.
+
+#### Anything else
+Try `docker compose down` and `docker compose up --build` to rebuild the containers.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
