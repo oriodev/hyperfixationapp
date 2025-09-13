@@ -11,7 +11,7 @@ Then, open a terminal in the repo, and `docker compose up`, and the compose file
 
 If you need to attach a terminal to the docker container directly (e.g. to run `pgsql` commands directly), then `docker compose exec database bash` for database container, or `docker compose exec pgadmin bash` for the pgadmin container. When you're inside the database container, you can run pgsql commands by firstly attaching to the database with `psql -U admin -d hyperfixation`. If you changed dthe default user from "admin" in the .env, change it to match that in the command. Same for the database name. You should be able to use pgsql commands now, like `\l` to list all DBs, `\c` to change DB (if for some reason you want to do that, but you shouldn't need to), and running regular ol' SQL statements. Note: you MUST have a semi-colon at the end of your SQL statements or they will NOT run!
 
-To access pgadmin, to do database things within the web client, you can visit `localhost:5050` and log in with the credentials you specified in the .env file.
+To access pgadmin, to do database things within the web client, you can visit `localhost:5050` and log in with the credentials you specified in the .env file. In the left-hand sidebar, click Servers, then click on the hyperfixation db. Then you'll be prompted for a password for the admin user. It's the one you set in the .env file. Under Schemas > public > Tables, choose a table, then right click on it and click view/edit data, allowing you to (you guessed it) view and edit data.
 
 ### Troubleshooting
 
