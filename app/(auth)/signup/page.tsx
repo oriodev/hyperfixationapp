@@ -15,16 +15,57 @@ import { InputType } from "@/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { createSession } from "@/app/api/session.api";
 
 export default function SignUp() {
   const title = "Sign up"
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, setError } = useForm({
     resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = (values: signupSchema) => {
-    console.log('values: ', values);
+  const onSubmit = async (values: signupSchema) => {
+
+    // make signup api call
+    const response = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
+
+    // set errors based on response from signup call
+    if (!response.ok) {
+      const errors = await response.json();
+    
+      if (errors.error) {
+        switch(true) {
+          case errors.error.includes("USERNAME ALREADY EXISTS"):
+            setError("username", {
+              type: "manual",
+              message: "Username already exists"
+            });
+            break;
+
+          case errors.error.includes("EMAIL ALREADY EXISTS"):
+            setError("email", {
+              type: "manual",
+              message: "Email already exists"
+            })
+            break;
+  
+          default:
+            break;
+        }
+      }
+    }
+
+    // set token
+    const data = await response.json();
+    if (data.token) {
+      await createSession(data.token);
+    }
   };
 
   return (
