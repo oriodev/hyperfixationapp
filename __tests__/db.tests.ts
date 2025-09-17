@@ -39,4 +39,17 @@ describe("getUserId", () => {
     const userId = await getUserId("ypbettles@gmail.com");
     expect(userId).toBe("1");
   });
+
+  it("should not return the same value if given two different (existing) emails", async () => {
+    const firstId = await getUserId("test1@test.com");
+    const secondId = await getUserId("test2@test.com");
+    const match = firstId === secondId;
+    expect(match).toBeFalsy;
+  });
+
+  it("should consistently return the same id for the same email", async () => {
+    const email: string = "test1@test.com";
+    const userId: string = await getUserId(email);
+    expect(await getUserId(email)).toBe(userId);
+  })
 });
