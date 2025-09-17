@@ -61,6 +61,10 @@ export default function SignUp() {
       }
     }
 
+    //FIXME: we only wanna do this part if they successfully sign up for an account
+    // it is present throwing errors that "body has already been consumed"
+    // if there is an error further up.
+    
     // set token
     const data = await response.json();
     if (data.token) {
