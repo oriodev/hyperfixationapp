@@ -17,7 +17,7 @@ async function verifyConnection(): Promise<void> {
     console.log('Successfully connected to database.');
     client.release();
   } catch (error) {
-    console.error('Error connecting to database:', error);
+    console.error('Connecting to database:', error);
     throw error;
   }
 }

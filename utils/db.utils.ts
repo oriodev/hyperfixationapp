@@ -13,7 +13,7 @@ export const getUser = async (email: string): Promise<QueryResult> => {
   try {
     user = await pool.query(queryText, values);
   } catch (error) {
-    console.error('Error getting user from email:', error);
+    console.error('Getting user from email:', error);
     throw error;
   }
   return user;
@@ -31,10 +31,11 @@ export const getUserId = async (email: string): Promise<string> => {
   try {
     result = await pool.query(queryText, values);
   } catch (error) {
-    console.error('Error getting user ID from email:', error);
+    console.error('Getting user ID from email:', error);
     throw error;
   }
-  return result.rows[0];
+  const id: number = result.rows[0].id;
+  return id.toString();
 }
 
 /**
@@ -57,7 +58,7 @@ export async function writeUser(
     await client.query(insertUserText, values);
     await client.query("COMMIT");
   } catch (error) {
-    console.error("Error writing user to database:", error);
+    console.error("Writing user to database:", error);
     throw error;
   } finally {
     client.release();
@@ -87,7 +88,7 @@ export async function emailExists(
     const result = await pool.query(queryText, values);
     userExists = result.rows[0].exists;
   } catch (error) {
-    console.error("Error while checking if user exists:", error);
+    console.error("Checking if user exists:", error);
     throw error;
   }
   return userExists;
@@ -116,7 +117,7 @@ export async function usernameExists(
     const result = await pool.query(queryText, values);
     userExists = result.rows[0].exists;
   } catch (error) {
-    console.error("Error while checking if user exists:", error);
+    console.error("Checking if user exists:", error);
     throw error;
   }
   return userExists;
