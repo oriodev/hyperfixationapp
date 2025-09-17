@@ -41,14 +41,14 @@ export default function SignUp() {
     
       if (errors.error) {
         switch(true) {
-          case errors.error.includes("USERNAME ALREADY EXISTS"):
+          case errors.error.includes("Username already exists"):
             setError("username", {
               type: "manual",
               message: "Username already exists"
             });
             break;
 
-          case errors.error.includes("EMAIL ALREADY EXISTS"):
+          case errors.error.includes("Email already exists"):
             setError("email", {
               type: "manual",
               message: "Email already exists"
