@@ -17,8 +17,10 @@ To access pgadmin, to do database things within the web client, you can visit `l
 
 #### "Port already in use" error when running `docker compose up`?
 It probably didn't shut down properly last time.
-`netstat -tnlp | grep 5432` to get the pid of the postgres process.
-Then kill it with `sudo kill -9 <pid>` (without the angle brackets of course).
+Firstly try `systemctl stop postgresql`, and `docker compouse up` again.
+If still having issues, `netstat -tnlp | grep 5432` to get the pid of
+the postgres process. Then kill it with `sudo kill -9 <pid>`
+(without the angle brackets of course).
 Then `docker compose up` again.
 
 #### The database didn't initialise when I first ran `docker compose up`?

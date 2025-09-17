@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
-  username VARCHAR(20),
-  email VARCHAR(100),
-  hashed_pass CHAR(60),
+  username VARCHAR(20) UNIQUE,
+  email VARCHAR(100) UNIQUE,
+  hashed_password CHAR(60),
   display_name VARCHAR(20),
   pronouns VARCHAR(20),
   created DATE,
