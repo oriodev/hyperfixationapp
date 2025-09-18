@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 // COMPONENTS
 import AuthContainer from "@/components/containers/auth-container";
@@ -18,19 +18,23 @@ import Link from "next/link";
 import { createSession } from "@/app/api/session.api";
 
 export default function Login() {
-  const title = 'Login';
+  const title = "Login";
 
- const { register, handleSubmit, formState: { errors }, setError } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm({
     resolver: zodResolver(loginSchema),
   });
 
   // make login api call
   const onSubmit = async (values: loginSchema) => {
-    
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
     });
@@ -38,23 +42,23 @@ export default function Login() {
     // set errors based on response from login call
     if (!response.ok) {
       const errors = await response.json();
-    
+
       if (errors.error) {
-        switch(true) {
+        switch (true) {
           case errors.error.includes("PASSWORDS DO NOT MATCH"):
             setError("password", {
               type: "manual",
-              message: "Incorrect Password"
+              message: "Incorrect Password",
             });
             break;
 
           case errors.error.includes("COULD NOT FIND USER IN DB"):
             setError("email", {
               type: "manual",
-              message: "Email does not exist"
-            })
+              message: "Email does not exist",
+            });
             break;
-  
+
           default:
             break;
         }
@@ -71,24 +75,28 @@ export default function Login() {
   return (
     <div className="h-screen w-screen bg-black flex justify-center items-center">
       <AuthContainer title={title}>
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col justify-center items-center gap-5">
-          
-          <TextInput 
-            title="Email" 
-            type={InputType.email} 
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full flex flex-col justify-center items-center gap-5"
+        >
+          <TextInput
+            title="Email"
+            type={InputType.email}
             error={errors.email?.message}
-            register={register('email')}
+            register={register("email")}
           />
 
-          <TextInput 
-            title="Password" 
-            type={InputType.password} 
+          <TextInput
+            title="Password"
+            type={InputType.password}
             error={errors.password?.message}
-            register={register('password')}
+            register={register("password")}
           />
 
           <Button text="Login" submit={true} />
-          <Link href={'/signup'} className="text-white underline">No account? Sign up</Link>
+          <Link href={"/signup"} className="text-white underline">
+            No account? Sign up
+          </Link>
         </form>
       </AuthContainer>
     </div>
