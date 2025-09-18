@@ -26,7 +26,7 @@ export const POST = async (request: Request) => {
     if (!currentUser.id) {
       return NextResponse.json(
         { error: "Invalid credentials" },
-        { status: 404 }
+        { status: 401 }
       );
     }
 
