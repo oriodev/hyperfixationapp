@@ -12,7 +12,6 @@ export const POST = async (request: Request) => {
 
   try {
     const dbResponse = await getUser(email);
-    console.log(dbResponse.rows[0])
     const row = dbResponse.rows[0];
 
     const currentUser: User = {
