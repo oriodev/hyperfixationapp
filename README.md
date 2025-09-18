@@ -19,6 +19,13 @@ See below for troubleshooting 'port already in use' errors.
 
 Make sure that when you run `npm run test ` or `npm run dev` that you see the message "Successfully connected to database." in console. This is the output from a verification function that checks the status of the database connection.
 
+## Schema and migrations
+Any schema changes should be reflected locally, in the cloud supabase instance, and in the init.sql script. They should be *reviewed* and agreed upon before taking place.
+
+We should also version-control any migrations (ideally, leaving the SQL used to perform the migration somewhere centralised in the repo to make updating local instances simpler.)
+
+Local instance of the database is a good place to test schema changes, but we need to make sure we keep the init.sql script and the supabase instance up-to-date. Likewise, if you make changes in supabase, please do update the init.sql script with the new table schema.
+
 ### Troubleshooting
 
 #### "Port already in use" error when running `docker compose up`?
@@ -41,6 +48,9 @@ Most likely a perms/ownership issue.
 From the root of the repo, outside the container, `chown -R 5050 ./pgadmin-data`.
 OR
 From within the pgadmin container, `chown -R pgadmin /pgadmin`.
+
+#### Generic SQL issues when running local instance of database
+It's possible that schema changes were made and code written that depends upon that new schema. Check init.sql for the schema and check that your local instance matches. If you are emotionally attched to the test data in your local instance, then run some migration SQL to make your schema match. If you're lucky, this might be stored in the repo for you. If you don't care about preserving the data you already have locally, then you can simply `docker compose down`, `rm -r db-data`, and `docker compose up` to entirely replace the database with the updated schema.
 
 #### Anything else
 Try `docker compose down` and `docker compose up --build` to rebuild the containers.
