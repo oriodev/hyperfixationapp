@@ -1,3 +1,8 @@
+/**
+ * Checks whether an error has a message. Returns true if so.
+ * @param error 
+ * @returns {boolean}
+ */
 export function isErrorWithMessage(error: unknown): error is { message: string } {
   return (
     typeof error === 'object' &&
