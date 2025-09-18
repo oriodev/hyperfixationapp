@@ -41,14 +41,14 @@ export default function SignUp() {
     
       if (errors.error) {
         switch(true) {
-          case errors.error.includes("USERNAME ALREADY EXISTS"):
+          case errors.error.includes("Username already exists"):
             setError("username", {
               type: "manual",
               message: "Username already exists"
             });
             break;
 
-          case errors.error.includes("EMAIL ALREADY EXISTS"):
+          case errors.error.includes("Email already exists"):
             setError("email", {
               type: "manual",
               message: "Email already exists"
@@ -59,12 +59,12 @@ export default function SignUp() {
             break;
         }
       }
-    }
-
-    // set token
-    const data = await response.json();
-    if (data.token) {
-      await createSession(data.token);
+    } else {
+      // set token if response ok
+      const data = await response.json();
+      if (data.token) {
+        await createSession(data.token);
+      }
     }
   };
 

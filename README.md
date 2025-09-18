@@ -13,12 +13,20 @@ If you need to attach a terminal to the docker container directly (e.g. to run `
 
 To access pgadmin, to do database things within the web client, you can visit `localhost:5050` and log in with the credentials you specified in the .env file. In the left-hand sidebar, click Servers, then click on the hyperfixation db. Then you'll be prompted for a password for the admin user. It's the one you set in the .env file. Under Schemas > public > Tables, choose a table, then right click on it and click view/edit data, allowing you to (you guessed it) view and edit data.
 
+## Using the local database:
+When you start development, run `docker compose up` to ensure the database and pg-admin containers are running.
+See below for troubleshooting 'port already in use' errors.
+
+Make sure that when you run `npm run test ` or `npm run dev` that you see the message "Successfully connected to database." in console. This is the output from a verification function that checks the status of the database connection.
+
 ### Troubleshooting
 
 #### "Port already in use" error when running `docker compose up`?
 It probably didn't shut down properly last time.
-`netstat -tnlp | grep 5432` to get the pid of the postgres process.
-Then kill it with `sudo kill -9 <pid>` (without the angle brackets of course).
+Firstly try `systemctl stop postgresql`, and `docker compouse up` again.
+If still having issues, `netstat -tnlp | grep 5432` to get the pid of
+the postgres process. Then kill it with `sudo kill -9 <pid>`
+(without the angle brackets of course).
 Then `docker compose up` again.
 
 #### The database didn't initialise when I first ran `docker compose up`?
@@ -36,6 +44,12 @@ From within the pgadmin container, `chown -R pgadmin /pgadmin`.
 
 #### Anything else
 Try `docker compose down` and `docker compose up --build` to rebuild the containers.
+
+# Unit tests
+We have a small (so far) suite of unit tests for some of the database functionality. They can be run from `npm run dev` and any further tests you wish to write can be placed into the __tests__ dir to be automatically run with `npm run test`.
+
+
+## Next Default README
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
