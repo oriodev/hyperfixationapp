@@ -10,7 +10,6 @@ import {
   emailExists,
   getUserId,
 } from "@/utils/db.utils";
-import { isErrorWithMessage } from "@/utils/error.utils";
 
 export const POST = async (request: Request) => {
   const user: SignupData = await request.json();
@@ -18,7 +17,7 @@ export const POST = async (request: Request) => {
 
   try {
     const hashedPassword = await hashPassword(password);
-    let userId: string, response: User;
+    let userId: string, currentUser: User;
 
     if (await usernameExists(username)) {
       return NextResponse.json(
@@ -35,8 +34,8 @@ export const POST = async (request: Request) => {
       await writeUser(username, email, hashedPassword);
       // Fetch newly created user ID from database.
       userId = await getUserId(email);
-      // Populate response object.
-      response = {
+      // Populate currentUser object.
+      currentUser = {
         id: userId,
         username,
         email,
@@ -45,21 +44,13 @@ export const POST = async (request: Request) => {
     }
 
     // return token
-    const token = await generateToken(response.id);
+    const token = await generateToken(currentUser.id);
     return NextResponse.json({ token }, { status: 201 });
-  } catch (err: unknown) {
-    if (isErrorWithMessage(err)) {
-      console.error(err.message);
-      return NextResponse.json(
-        { error: err.message },
-        { status: 500 },
-      );
-    } else {
-      console.error(err);
-      return NextResponse.json(
-        { error: 'INTERNAL SERVER ERROR' },
-        { status: 500 },
-      );
-    }
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "INTERNAL SERVER ERROR" },
+      { status: 500 }
+    );
   }
 };
