@@ -1,4 +1,28 @@
+import { IconType } from "react-icons"
+
 // TYPES
+export type Checkin = {
+  text: string,
+  type: CheckinType, 
+}
+
+export type Infodump = {
+  title: string,
+  image: string
+}
+
+export type Fixation = {
+  title: string,
+  image: string,
+  starred: boolean
+}
+
+export type NavLink = {
+  text: string,
+  href: string,
+  icon: IconType
+}
+
 export type User = {
   id: string;
   username: string;
@@ -24,3 +48,17 @@ export enum InputType {
   password = "password",
   passwordCheck = "passwordCheck"
 }
+
+export enum CheckinType {
+  book = "book",
+  movie = "movie",
+  tvshow = "tvshow",
+  music = "music",
+  game = "game"
+}
+
+// SET STATE FUNCTION TYPES
+
+export type SetStarred = (updater: (prev: boolean) => boolean) => void;
+export type SetSortAlpha = (updater: (prev: boolean) => boolean) => void;
+export type SetSearchContent = (updater: ( (prev: string) => string) | string) => void;

@@ -4,7 +4,7 @@ interface ButtonProps {
   handleClick?: () => void;
 }
 
-const Button = ({ text, submit, handleClick }: ButtonProps) => {
+const SubmitButton = ({ text, submit, handleClick }: ButtonProps) => {
   return (
     <button
       className="w-3/4 color-animation pt-4 pb-4 pl-5 pr-5 rounded-lg hover:cursor-pointer hover:opacity-90 transition"
@@ -16,4 +16,4 @@ const Button = ({ text, submit, handleClick }: ButtonProps) => {
   )
 }
 
-export default Button;
+export default SubmitButton;
