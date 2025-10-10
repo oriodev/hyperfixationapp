@@ -13,7 +13,8 @@ export type Infodump = {
 
 export type Fixation = {
   title: string,
-  image: string
+  image: string,
+  starred: boolean
 }
 
 export type NavLink = {
@@ -37,3 +38,9 @@ export enum CheckinType {
   music = "music",
   game = "game"
 }
+
+// SET STATE FUNCTION TYPES
+
+export type SetStarred = (updater: (prev: boolean) => boolean) => void;
+export type SetSortAlpha = (updater: (prev: boolean) => boolean) => void;
+export type SetSearchContent = (updater: ( (prev: string) => string) | string) => void;

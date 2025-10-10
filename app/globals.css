@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/* ADD LATER WHEN INTRODUCING DARK MODE */
+
+/* 
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+} */
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+@theme inline {
+  --font-sans: var(--font-poppins);
+}
+
+
+
+body {
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
 @layer components {
 
     /* GRADIENT BACKGROUND OPTIONS */

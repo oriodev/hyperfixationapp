@@ -1,7 +1,21 @@
-// PACKAGES
-import { MdArrowDropDown } from "react-icons/md";
+'use client'
 
-const FixationTopBar = () => {
+import { SetSearchContent, SetStarred } from "@/types";
+
+// PACKAGES
+import { BiStar } from "react-icons/bi";
+import Searchbar from "../form/searchbar";
+
+interface FixationTopBarProps {
+  starred: boolean;
+  setStarred: SetStarred;
+  setSearchContent: SetSearchContent
+
+}
+
+const FixationTopBar = ({ starred, setStarred, setSearchContent }: FixationTopBarProps) => {
+
+
   return (
     <>
       {/* DESKTOP VERSION */}
@@ -11,46 +25,41 @@ const FixationTopBar = () => {
 
           {/* FILTERS */}
 
-          {/* TODO: MAKE THESE REAL DROPDOWNS */}
           <div className="flex gap-3">
-            <div className="rounded-xl p-2 pr-4 border flex gap-2 items-center">
-              <MdArrowDropDown size={30} />
-              <p>RECENTLY UPDATED</p>
+
+            <div
+              className={`${starred ? 'bg-amber-200' : 'bg-slate-200'} rounded-xl p-2 pl-5 pr-5 border flex gap-2 items-center hover:cursor-pointer hover:opacity-80 transition shadow`}
+              onClick={() => setStarred(prev => !prev)}
+            >
+              <BiStar size={25} />
+              <p className="font-bold text-lg">Starred</p>
             </div>
 
-            <div className="rounded-xl p-2 pr-4 border flex gap-2 items-center">
-              <MdArrowDropDown size={30} />
-              <p>FAVOURITES</p>
-            </div>
-
-            <div className="rounded-xl p-2 pr-4 border flex gap-2 items-center">
-              <MdArrowDropDown size={30} />
-              <p>FORM OF MEDIA</p>
-            </div>
-
-            <div className="rounded-xl p-2 pr-4 border flex gap-2 items-center">
-              <MdArrowDropDown size={30} />
-              <p>ALPHABETICAL</p>
-            </div>
           </div>
 
         </div>
 
-        {/* TODO: MAKE THIS A REAL SEARCHBAR */}
-        <div className="w-1/6 h-full rounded-xl p-2 border">
-          <p>search...</p>
-        </div>
+        <Searchbar setSearchContent={setSearchContent} />
       </div>
 
 
       {/* MOBILE AND TABLET VERSION */}
-      <div className="flex lg:hidden flex-col gap-2 bg-white text-black w-full items-center justify-center p-5">
-          <p className="text-3xl font-black">FIXATIONS</p>
-          <div className="flex gap-2">
-            <p className="underline hover:cursor">Recent</p>
-            <p className="hover:cursor">Favourites</p>
-            <p className="hover:cursor">Alphabetical</p>
+      <div className="flex lg:hidden flex-col gap-4 bg-white text-black w-full items-center justify-center p-5 sm:rounded-xl">
+          <div className="flex flex-col gap-2 items-center w-full">
+            <p className="text-3xl font-black">FIXATIONS</p>
+            <Searchbar setSearchContent={setSearchContent} />
           </div>
+
+          <div className="flex gap-2">
+            <div
+              className={`${starred ? 'bg-amber-200' : 'bg-slate-200'} rounded-xl p-2 pl-5 pr-5 border flex gap-2 items-center hover:cursor-pointer hover:opacity-80 transition shadow`}
+              onClick={() => setStarred(prev => !prev)}
+            >
+              <BiStar size={25} />
+              <p className="font-bold text-lg">Starred</p>
+            </div>
+          </div>
+
       </div>
     </>
   )

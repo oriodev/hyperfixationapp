@@ -1,5 +1,14 @@
 import { CheckinType } from "./types";
 
+// DIFFERENT USERNAME LENGTHS FOR TESTING
+// lucabear - 8
+// lucabear10 - 10
+// lucabear15lucab - 15
+// lucabear20lucabear - 20
+
+// 'i like the ocean and pokemon and cavetown' (48)
+// 'i like the ocean and pokemon and cavetown and cakei like the ocean and pokemon and cavetown and cake' (100)
+
 export const user = {
   username: 'lucabear',
   bio: 'i like the ocean and pokemon and cavetown',
@@ -22,27 +31,33 @@ export const user = {
   fixations: [
     {
       title: 'cavetown',
-      image: 'cavetown.gif'
+      image: 'cavetown.gif',
+      starred: true
     },
     {
       title: 'biology',
-      image: 'biology.jpg'
+      image: 'biology.jpg',
+      starred: false
     },
     {
       title: 'minecraft',
-      image: 'dolphin.jpg'
+      image: 'dolphin.jpg',
+      starred: true
     },
     {
       title: 'ocean',
-      image: 'ocean.jpg'
+      image: 'ocean.jpg',
+      starred: true
     },
     {
       title: 'pokemon',
-      image: 'pokemonwatertypes.jpg'
+      image: 'pokemonwatertypes.jpg',
+      starred: true
     },
     {
       title: 'stardew valley',
-      image: 'stardew.png'
+      image: 'stardew.png',
+      starred: false
     }
   ],
   checkin: [
