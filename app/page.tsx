@@ -1,7 +1,7 @@
 // COMPONENTS
 import AuthButtons from "@/components/containers/auth-buttons";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="h-screen w-screen bg-black text-white flex flex-col gap-7 justify-center items-center">
         <div className="flex flex-col gap-1 justify-center items-center">
