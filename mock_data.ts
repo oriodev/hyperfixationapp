@@ -63,7 +63,7 @@ export const mock_user: User = {
       starred: false
     }
   ],
-  checkin: [
+  checkins: [
     {
       type: CheckinType.book,
       text: 'the trials of life'

@@ -33,7 +33,7 @@ export type User = {
   profileTags: string[];
   pinnedInfodumps: Infodump[];
   fixations: Fixation[];
-  checkin: Checkin[];
+  checkins: Checkin[];
 }
 
 export type LoginData = {

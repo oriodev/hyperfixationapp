@@ -1,16 +1,16 @@
+"use client"
+
 // COMPONENTS
 import CheckIn from "@/components/containers/checkin";
 import PinnedInfodump from "@/components/containers/pinned-infodump";
+import { userStore } from "@/store/user";
 
 // TYPES
-import { Checkin, Infodump } from "@/types";
+import { Infodump, User } from "@/types";
 
-interface ProfilePinnedBar {
-  checkins: Checkin[];
-  pinnedInfodumps: Infodump[];
-}
-
-const ProfilePinnedBar = ({ checkins, pinnedInfodumps }: ProfilePinnedBar ) => {
+const ProfilePinnedBar = () => {
+    const user: User = userStore((state: any) => state.user);
+    const { checkins, pinnedInfodumps } = user;
 
   // ENSURE 3 MAX PINNED INFODUMPS
   const infodumps = pinnedInfodumps.slice(0, 3);
@@ -20,7 +20,7 @@ const ProfilePinnedBar = ({ checkins, pinnedInfodumps }: ProfilePinnedBar ) => {
       <CheckIn checkins={checkins} />
 
       {
-        infodumps.map(infodump => (
+        infodumps.map((infodump: Infodump) => (
           <PinnedInfodump
             key={infodump.title}
             infodump={infodump}

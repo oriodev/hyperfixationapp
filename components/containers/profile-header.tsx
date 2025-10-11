@@ -1,14 +1,13 @@
+"use client"
+
 // COMPONENTS
 import Tags from "@/components/containers/tags";
+import { userStore } from "@/store/user";
+import { User } from "@/types";
 
-interface ProfileHeaderProps {
-  username: string;
-  bio: string;
-  profilePicture: string;
-  tags: string[];
-}
-
-const ProfileHeader = ({ username, bio, tags, profilePicture }: ProfileHeaderProps) => {
+const ProfileHeader = () => {
+  const user: User = userStore((state: any) => state.user);
+  const { username, bio, profileTags, profilePicture } = user;
 
   // CHANGES USERNAME FONT SIZE BASED ON IT'S LENGTH FOR MOBILE RESPONSIVITY
   const fontSize = username.length < 10 ? '4rem' : username.length < 15 ? '3rem' : '2rem';
@@ -45,7 +44,7 @@ const ProfileHeader = ({ username, bio, tags, profilePicture }: ProfileHeaderPro
           </div>
         
         {/* USER TAGS */}
-        <Tags tags={tags} />
+        <Tags tags={profileTags} />
         </div>
       </div>
   )
