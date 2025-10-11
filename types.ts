@@ -28,6 +28,12 @@ export type User = {
   username: string;
   email: string;
   hashedPassword: string;
+  bio: string;
+  profilePicture: string;
+  profileTags: string[];
+  pinnedInfodumps: Infodump[];
+  fixations: Fixation[];
+  checkin: Checkin[];
 }
 
 export type LoginData = {
