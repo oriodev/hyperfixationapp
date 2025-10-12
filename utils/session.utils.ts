@@ -55,6 +55,10 @@ export const fetchUserFromSession = async () => {
 
   const user = await getUser(userId);
 
+  // TODO: ENSURE THE DATABASE MATCHES THIS BY DEFAULT
+  // THIS IS A TEMPORARY MEASURE TO ADD THE MISSING PROPERTIES IN
+  // THAT THE DB DOESN'T HAVE BUT THE FRONTEND NEEDS
+  // UNTIL I CAN FIGURE OUT HOW THE DB WORKS
   const temporarilyModifiedUser: User = {
       id: user.id,
       username: user.username,

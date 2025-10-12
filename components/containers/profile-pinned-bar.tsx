@@ -3,13 +3,15 @@
 // COMPONENTS
 import CheckIn from "@/components/containers/checkin";
 import PinnedInfodump from "@/components/containers/pinned-infodump";
-import { userStore } from "@/store/user";
 
 // TYPES
 import { Infodump, User } from "@/types";
 
-const ProfilePinnedBar = () => {
-    const user: User = userStore((state: any) => state.user);
+interface ProfilePinnedBarProps {
+  user: User;
+}
+
+const ProfilePinnedBar = ({ user }: ProfilePinnedBarProps) => {
     const { checkins, pinnedInfodumps } = user;
 
   // ENSURE 3 MAX PINNED INFODUMPS

@@ -6,10 +6,12 @@ import { Fixation, User } from "@/types";
 // COMPONENTS
 import FixationTopBar from "./fixation-top-bar";
 import { useEffect, useState } from "react";
-import { userStore } from "@/store/user";
 
-const FixationDisplay = () => {
-  const user: User = userStore((state: any) => state.user);
+interface FixationDisplayProps {
+  user: User;
+}
+
+const FixationDisplay = ({ user }: FixationDisplayProps) => {
   const { fixations } = user;
 
   const [starred, setStarred] = useState<boolean>(false);

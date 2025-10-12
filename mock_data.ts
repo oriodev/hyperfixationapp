@@ -15,6 +15,7 @@ export const mock_user: User = {
   username: 'lucabear',
   hashedPassword: 'hashedpassword',
   bio: 'i like the ocean and pokemon and cavetown',
+  pronouns: 'he/him',
   profilePicture: 'lucabear.jpg',
   profileTags: ['pokemon', 'cavetown', 'science', 'minecraft'],
   pinnedInfodumps: [

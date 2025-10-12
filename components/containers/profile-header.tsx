@@ -2,11 +2,13 @@
 
 // COMPONENTS
 import Tags from "@/components/containers/tags";
-import { userStore } from "@/store/user";
 import { User } from "@/types";
 
-const ProfileHeader = () => {
-  const user: User = userStore((state: any) => state.user);
+interface ProfileHeaderProps {
+  user: User;
+}
+
+const ProfileHeader = ({ user }: ProfileHeaderProps) => {
   const { username, bio, profileTags, profilePicture } = user;
 
   // CHANGES USERNAME FONT SIZE BASED ON IT'S LENGTH FOR MOBILE RESPONSIVITY
