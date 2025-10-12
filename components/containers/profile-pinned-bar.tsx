@@ -6,20 +6,31 @@ import PinnedInfodump from "@/components/containers/pinned-infodump";
 
 // TYPES
 import { Infodump, User } from "@/types";
+import { BiPin } from "react-icons/bi";
 
 interface ProfilePinnedBarProps {
   user: User;
 }
 
 const ProfilePinnedBar = ({ user }: ProfilePinnedBarProps) => {
-    const { checkins, pinnedInfodumps } = user;
+  const { checkins, pinnedInfodumps } = user;
 
   // ENSURE 3 MAX PINNED INFODUMPS
   const infodumps = pinnedInfodumps.slice(0, 3);
 
+  const emptyPinnedInfodumps = pinnedInfodumps.length === 0;
+
   return (
     <div className="p-5 pt-0 md:p-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       <CheckIn checkins={checkins} />
+
+      {
+        emptyPinnedInfodumps && [1, 2, 3].map((index) => (
+          <PinnedInfodump
+            key={index}
+          />
+        ))
+      }
 
       {
         infodumps.map((infodump: Infodump) => (
