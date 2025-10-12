@@ -15,7 +15,7 @@ import { InputType } from "@/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { createSession } from "@/app/api/session.api";
+import { createSession } from "@/utils/session.utils";
 
 export default function Login() {
   const title = "Login";
@@ -65,7 +65,6 @@ export default function Login() {
       }
     }
 
-    // TODO: create the session from the token
     const data = await response.json();
     if (data.token) {
       await createSession(data.token);

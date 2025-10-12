@@ -78,4 +78,3 @@ export const mock_user: User = {
     }
   ]
 }
-

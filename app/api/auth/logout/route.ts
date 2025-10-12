@@ -1,7 +1,7 @@
 'use server';
 
+import { deleteSession } from "@/utils/session.utils";
 import { NextResponse } from "next/server";
-import { deleteSession } from "../../session.api";
 
 export const POST = async () => {
   try {

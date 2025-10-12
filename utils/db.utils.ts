@@ -2,21 +2,43 @@ import { pool } from "../lib/db";
 import { QueryResult } from "pg";
 
 /**
+ * Get entire user record corresponding with a given user id.
+ * @param {string} id 
+ * @returns {Promise<QueryResult>}
+ */
+export const getUser = async (id: string) => {
+  // TODO: ADD RETURN TYPE BACK IN, REMOVED FOR TESTING
+  const queryText = "SELECT * FROM users WHERE id=$1";
+  const values = [parseInt(id)];
+
+  try {
+    const user = await pool.query(queryText, values);
+    if (user.rowCount === 0) throw new Error(`No user found with ID ${id}`);
+    
+    // this destructures the wider object to return only the user
+    return user.rows[0];
+
+  } catch (error) {
+    console.error('Getting user from id:', error);
+    throw error;
+  }
+};
+
+/**
  * Get entire user record corresponding with given a email address.
  * @param {string} email 
  * @returns {Promise<QueryResult>}
  */
-export const getUser = async (email: string): Promise<QueryResult> => {
+export const getUserByEmail = async (email: string): Promise<QueryResult> => {
   const queryText = "SELECT * FROM users WHERE email=$1";
   const values = [email];
-  let user;
   try {
-    user = await pool.query(queryText, values);
+    const user = await pool.query(queryText, values);
+    return user;
   } catch (error) {
     console.error('Getting user from email:', error);
     throw error;
   }
-  return user;
 };
 
 /**
@@ -27,15 +49,15 @@ export const getUser = async (email: string): Promise<QueryResult> => {
 export const getUserId = async (email: string): Promise<string> => {
   const queryText = "SELECT id FROM users WHERE email=$1";
   const values = [email];
-  let result;
   try {
-    result = await pool.query(queryText, values);
+    const result = await pool.query(queryText, values);
+    const id: number = result.rows[0].id;
+    return id.toString();
   } catch (error) {
     console.error('Getting user ID from email:', error);
     throw error;
   }
-  const id: number = result.rows[0].id;
-  return id.toString();
+
 }
 
 /**

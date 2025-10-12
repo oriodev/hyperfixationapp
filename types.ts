@@ -29,6 +29,7 @@ export type User = {
   email: string;
   hashedPassword: string;
   bio: string;
+  pronouns: string;
   profilePicture: string;
   profileTags: string[];
   pinnedInfodumps: Infodump[];

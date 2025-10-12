@@ -15,7 +15,8 @@ import { InputType } from "@/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { createSession } from "@/app/api/session.api";
+import { createSession } from "@/utils/session.utils";
+
 
 export default function SignUp() {
   const title = "Sign up"
