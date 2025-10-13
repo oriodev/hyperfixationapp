@@ -2,8 +2,11 @@
 
 import { cookies } from "next/headers";
 import { decodeToken } from "./token.utils";
-import { getUser } from "./db.utils";
 import { User } from "@/types";
+import { getUser } from "./user.utils";
+import { getFixations, getFixationTags } from "./fixations.utils";
+import { getPinnedInfodumps } from "./infodumps.utils";
+import { getCheckins } from "./checkins.utils";
 
 export const createSession = async (token: string) => {
   try {
@@ -55,11 +58,13 @@ export const fetchUserFromSession = async () => {
 
   const user = await getUser(userId);
 
-  // TODO: ENSURE THE DATABASE MATCHES THIS BY DEFAULT
-  // THIS IS A TEMPORARY MEASURE TO ADD THE MISSING PROPERTIES IN
-  // THAT THE DB DOESN'T HAVE BUT THE FRONTEND NEEDS
-  // UNTIL I CAN FIGURE OUT HOW THE DB WORKS
-  const temporarilyModifiedUser: User = {
+  // FETCH ADDITIONAL USER DATA FROM OTHER TABLES
+  const profileTags = await getFixationTags(userId);
+  const pinnedInfodumps = await getPinnedInfodumps(userId);
+  const fixations = await getFixations(userId);
+  const checkins = await getCheckins(userId);
+
+  const completeUser: User = {
       id: user.id,
       username: user.username,
       email: user.email,
@@ -67,11 +72,13 @@ export const fetchUserFromSession = async () => {
       bio: user.bio,
       pronouns: user.pronouns,
       profilePicture: user.profilePicture,
-      profileTags: [],
-      pinnedInfodumps: [],
-      fixations: [],
-      checkins: [],
+      profileTags: profileTags,
+      pinnedInfodumps: pinnedInfodumps,
+      fixations: fixations,
+      checkins: checkins,
+      created: user.created,
+      lastLoggedIn: user.lastLoggedIn
   };
 
-  return temporarilyModifiedUser;
+  return completeUser;
 }
