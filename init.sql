@@ -81,14 +81,4 @@ CREATE TABLE IF NOT EXISTS fixationTags (
   CONSTRAINT fk_tag_id FOREIGN KEY (tag_id)
   REFERENCES tags(id) ON DELETE CASCADE
 );
--- Creating the join table between checkins and users (many-to-many) --
-CREATE TABLE IF NOT EXISTS userTags (
-  id SERIAL PRIMARY KEY,
-  user_id INT,
-  checkin_id INT,
-  CONSTRAINT fk_user_id FOREIGN KEY (user_id)
-  REFERENCES users(id) ON DELETE CASCADE,
-  CONSTRAINT fk_checkin_id FOREIGN KEY (checkin_id)
-  REFERENCES checkins(id) ON DELETE CASCADE
-);
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin;
