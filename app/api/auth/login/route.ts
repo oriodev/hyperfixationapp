@@ -4,7 +4,7 @@ import { generateToken } from "@/utils/token.utils";
 import { NextResponse } from "next/server";
 import { comparePasswords } from "@/utils/auth.utils";
 import { LoginData } from "@/types";
-import { getUserByEmail } from "@/utils/db.utils";
+import { getUserByEmail } from "@/utils/user.utils";
 
 export const POST = async (request: Request) => {
   const user: LoginData = await request.json();

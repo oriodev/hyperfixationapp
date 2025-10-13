@@ -30,6 +30,8 @@ export type User = {
   hashedPassword: string;
   bio: string;
   pronouns: string;
+  created: Date; // TODO: check types bc dates are handled weird in js
+  lastLoggedIn: Date;
   profilePicture: string;
   profileTags: string[];
   pinnedInfodumps: Infodump[];

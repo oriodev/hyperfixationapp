@@ -11,9 +11,8 @@ import { fetchUserFromSession } from "@/utils/session.utils";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
-
   const user = await fetchUserFromSession();
-  if (!user) redirect('/')
+  if (!user) redirect('/');
 
   return (
     <div className="w-screen flex flex-col gap-8 blue-mesh-gradient p-0 md:p-10 overflow-hidden">

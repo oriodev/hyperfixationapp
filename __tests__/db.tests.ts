@@ -1,4 +1,5 @@
-import { emailExists, getUserId, usernameExists } from "../utils/db.utils";
+import { usernameExists, emailExists } from "@/utils/auth.utils";
+import { getUserId } from "../utils/user.utils";
 
 describe("emailExists", () => {
   it("should return the correct result for email which doesn't exist", async () => {

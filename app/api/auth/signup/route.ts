@@ -2,14 +2,12 @@
 
 import { generateToken } from "@/utils/token.utils";
 import { NextResponse } from "next/server";
-import { hashPassword } from "@/utils/auth.utils";
+import { hashPassword, usernameExists, emailExists } from "@/utils/auth.utils";
 import { SignupData } from "@/types";
 import {
   writeUser,
-  usernameExists,
-  emailExists,
   getUserId,
-} from "@/utils/db.utils";
+} from "@/utils/user.utils";
 
 export const POST = async (request: Request) => {
   const user: SignupData = await request.json();
