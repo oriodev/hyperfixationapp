@@ -1,20 +1,20 @@
 "use server";
 
-import { generateToken } from "@/utils/session.utils";
+import { generateToken } from "@/utils/token.utils";
 import { NextResponse } from "next/server";
 import { comparePasswords } from "@/utils/auth.utils";
-import { User, LoginData } from "@/types";
-import { getUser } from "@/utils/db.utils";
+import { LoginData } from "@/types";
+import { getUserByEmail } from "@/utils/user.utils";
 
 export const POST = async (request: Request) => {
   const user: LoginData = await request.json();
   const { email, password } = user;
 
   try {
-    const dbResponse = await getUser(email);
+    const dbResponse = await getUserByEmail(email);
     const row = dbResponse.rows[0];
 
-    const currentUser: User = {
+    const currentUser = {
       id: row.id,
       username: row.username,
       email: row.email,

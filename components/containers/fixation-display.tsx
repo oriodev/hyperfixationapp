@@ -1,17 +1,19 @@
 'use client'
 
 // TYPES
-import { Fixation } from "@/types";
+import { Fixation, User } from "@/types";
 
 // COMPONENTS
 import FixationTopBar from "./fixation-top-bar";
 import { useEffect, useState } from "react";
 
 interface FixationDisplayProps {
-  fixations: Fixation[];
+  user: User;
 }
 
-const FixationDisplay = ({ fixations }: FixationDisplayProps ) => {
+const FixationDisplay = ({ user }: FixationDisplayProps) => {
+  const { fixations } = user;
+
   const [starred, setStarred] = useState<boolean>(false);
   const [searchContent, setSearchContent] = useState<string>('');
 

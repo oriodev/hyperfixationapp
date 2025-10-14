@@ -28,6 +28,15 @@ export type User = {
   username: string;
   email: string;
   hashedPassword: string;
+  bio: string;
+  pronouns: string;
+  created: Date; // TODO: check types bc dates are handled weird in js
+  lastLoggedIn: Date;
+  profilePicture: string;
+  profileTags: string[];
+  pinnedInfodumps: Infodump[];
+  fixations: Fixation[];
+  checkins: Checkin[];
 }
 
 export type LoginData = {

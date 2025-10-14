@@ -1,4 +1,4 @@
-import { CheckinType } from "./types";
+import { CheckinType, User } from "./types";
 
 // DIFFERENT USERNAME LENGTHS FOR TESTING
 // lucabear - 8
@@ -9,12 +9,16 @@ import { CheckinType } from "./types";
 // 'i like the ocean and pokemon and cavetown' (48)
 // 'i like the ocean and pokemon and cavetown and cakei like the ocean and pokemon and cavetown and cake' (100)
 
-export const user = {
+export const mock_user = {
+  id: '1',
+  email: 'lucabear@email.com',
   username: 'lucabear',
+  hashedPassword: 'hashedpassword',
   bio: 'i like the ocean and pokemon and cavetown',
-  profile_picture: 'lucabear.jpg',
-  profile_tags: ['pokemon', 'cavetown', 'science', 'minecraft'],
-  pinned_infodumps: [
+  pronouns: 'he/him',
+  profilePicture: 'lucabear.jpg',
+  profileTags: ['pokemon', 'cavetown', 'science', 'minecraft'],
+  pinnedInfodumps: [
     {
       title: '#001 [ best cavetown albums ]',
       image: 'cavetown.gif'
@@ -60,7 +64,7 @@ export const user = {
       starred: false
     }
   ],
-  checkin: [
+  checkins: [
     {
       type: CheckinType.book,
       text: 'the trials of life'
@@ -75,4 +79,3 @@ export const user = {
     }
   ]
 }
-

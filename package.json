@@ -22,7 +22,14 @@
     "preset": "ts-jest",
     "transform": {
       "^.+\\.(ts|tsx)?$": "ts-jest"
-    }
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1",
+      "^@/components/(.*)$": "<rootDir>/components/$1",
+      "^@/utils/(.*)$": "<rootDir>/utils/$1",
+      "^@/lib/(.*)$": "<rootDir>/lib/$1"
+    },
+    "setupFilesAfterEnv": ["./jest.setup.ts"]
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
