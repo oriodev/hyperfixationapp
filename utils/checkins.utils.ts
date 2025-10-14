@@ -18,7 +18,7 @@ export const getCheckins = async (id: string) => {
     return checkins.rows;
 
   } catch (error) {
-    console.error('Getting fixation tags from id:', error);
+    console.error('Getting checkins from id:', error);
     throw error;
   }
 };
