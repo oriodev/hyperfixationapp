@@ -14,13 +14,11 @@ describe("getCheckins", () => {
   });
 
   it("should return checkins given a userID with checkins", async () => {
-    const mockCheckins = mock_user.checkins;
-    (pool.query as jest.Mock).mockResolvedValueOnce({ rowCount: mockCheckins.length, rows: mockCheckins });
+    const mockedData = mock_user.checkins;
+    (pool.query as jest.Mock).mockResolvedValueOnce({ rowCount: mockedData.length, rows: mockedData });
     const result = await getCheckins("1")
-    expect(result).toEqual(mockCheckins);
+    expect(result).toEqual(mockedData);
     expect(pool.query).toHaveBeenCalledWith("SELECT * FROM checkins WHERE id=$1", [1]);
-
-    expect('1').toEqual('1');
   })
 
   it("should return an empty array given a userID without checkins", async () => {
