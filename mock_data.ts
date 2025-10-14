@@ -9,7 +9,7 @@ import { CheckinType, User } from "./types";
 // 'i like the ocean and pokemon and cavetown' (48)
 // 'i like the ocean and pokemon and cavetown and cakei like the ocean and pokemon and cavetown and cake' (100)
 
-export const mock_user: User = {
+export const mock_user = {
   id: '1',
   email: 'lucabear@email.com',
   username: 'lucabear',

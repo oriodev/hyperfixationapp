@@ -21,23 +21,20 @@ export const comparePasswords = async (password: string, hashedPassword: string)
 export async function emailExists(
   email: string | undefined
 ): Promise<boolean> {
-  let userExists = false;
-  let queryText, values;
+
   try {
-    if (email !== undefined) {
-      queryText = "SELECT EXISTS(SELECT 1 FROM users WHERE email = $1)";
-      values = [email];
-    } else {
-      // If no email provided, throw an error.
-      throw new Error("No email provided.");
-    }
+    console.log('email: ', email)
+    if (!email) throw new Error("No email provided.");
+
+    const queryText = "SELECT EXISTS(SELECT 1 FROM users WHERE email = $1)";
+    const values = [email];
+
     const result = await pool.query(queryText, values);
-    userExists = result.rows[0].exists;
+    return result.rows[0].exists;
   } catch (error) {
     console.error("Checking if user exists:", error);
     throw error;
   }
-  return userExists;
 }
 
 /**
@@ -50,21 +47,17 @@ export async function emailExists(
 export async function usernameExists(
   username: string | undefined
 ): Promise<boolean> {
-  let userExists = false;
-  let queryText, values;
   try {
-    if (username !== undefined) {
-      queryText = "SELECT EXISTS(SELECT 1 FROM users WHERE username = $1)";
-      values = [username];
-    } else {
-      // If no username provided, throw an error.
-      throw new Error("No username provided.");
-    }
+
+    if (!username) throw new Error("No username provided.");
+    
+    const queryText = "SELECT EXISTS(SELECT 1 FROM users WHERE username = $1)";
+    const values = [username];
+    
     const result = await pool.query(queryText, values);
-    userExists = result.rows[0].exists;
+    return result.rows[0].exists;
   } catch (error) {
     console.error("Checking if user exists:", error);
     throw error;
   }
-  return userExists;
 }

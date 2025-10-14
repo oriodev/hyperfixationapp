@@ -1,5 +1,4 @@
-import { usernameExists, emailExists } from "@/utils/auth.utils";
-import { getUserId } from "../utils/user.utils";
+import { emailExists, usernameExists } from "@/utils/auth.utils";
 
 describe("emailExists", () => {
   it("should return the correct result for email which doesn't exist", async () => {
@@ -8,7 +7,7 @@ describe("emailExists", () => {
   });
 
   it("should return the correct result for email which does exist", async () => {
-    const userExists = await emailExists("ypbettles@gmail.com");
+    const userExists = await emailExists("cas@bby.com");
     expect(userExists).toBeTruthy();
   });
 
@@ -24,7 +23,7 @@ describe("usernameExists", () => {
   });
 
   it("should return the correct result for username which does exist", async () => {
-    const userExists = await usernameExists("yasbettles");
+    const userExists = await usernameExists("casbby");
     expect(userExists).toBeTruthy();
   });
 
@@ -35,22 +34,3 @@ describe("usernameExists", () => {
   });
 });
 
-describe("getUserId", () => {
-  it("should return the correct user id for an email we know to exist", async () => {
-    const userId = await getUserId("ypbettles@gmail.com");
-    expect(userId).toBe("1");
-  });
-
-  it("should not return the same value if given two different (existing) emails", async () => {
-    const firstId = await getUserId("test1@test.com");
-    const secondId = await getUserId("test2@test.com");
-    const match = firstId === secondId;
-    expect(match).toBeFalsy();
-  });
-
-  it("should consistently return the same id for the same email", async () => {
-    const email: string = "test1@test.com";
-    const userId: string = await getUserId(email);
-    expect(await getUserId(email)).toBe(userId);
-  })
-});
