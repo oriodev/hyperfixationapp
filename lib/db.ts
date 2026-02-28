@@ -16,12 +16,16 @@ if (useLocalDb) {
   // If USE_LOCAL_DB is false, we require SUPABASE_URL to be defined, so that 
   // we may connect to the cloud-hosted database. If none is given,
   // we cannot provide a sensible default for this so we throw an error.
-  const connectionString = process.env.SUPABASE_URL;
-  if (!connectionString) {
-    throw new Error('No supabase connection URL found.');
-  }
+  // const connectionString = process.env.SUPABASE_URL;
+  // if (!connectionString) {
+  //   throw new Error('No supabase connection URL found.');
+  // }
   dbConfig = {
-    connectionString,
+    user: process.env.SUPABASE_USER,
+    host: process.env.SUPABASE_HOST,
+    database: process.env.SUPABASE_DB ?? "postgres",
+    password: process.env.POSTGRES_PASSWORD,
+    port: Number(process.env.SUPABASE_PORT) ?? 6543,
   }
 }
 
